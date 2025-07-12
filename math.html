@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Math Expression Evaluator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #1e1f36;
+      color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px;
+    }
+    input, button {
+      padding: 10px 16px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 12px;
+    }
+    input {
+      width: 300px;
+    }
+    button {
+      background-color: #00f7ff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #00c9d4;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #00ff90;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Math Expression Evaluator</h2>
+  <input type="text" id="expression" placeholder="e.g. 2 + 3 * 4 or Math.sin(Math.PI/2)">
+  <button onclick="evaluateExpression()">Solve</button>
+
+  <div id="result"></div>
+
+  <script>
+    function evaluateExpression() {
+      const input = document.getElementById('expression').value;
+      const resultDiv = document.getElementById('result');
+
+      try {
+        // Create a new function to evaluate safely
+        const result = Function('"use strict"; return (' + input + ')')();
+        resultDiv.textContent = `Result: ${result}`;
+      } catch (err) {
+        resultDiv.textContent = '❌ Invalid expression';
+        resultDiv.style.color = '#ff4b4b';
+      }
+    }
+  </script>
+
+</body>
+</html>
